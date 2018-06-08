@@ -9,17 +9,23 @@ import java.net.URISyntaxException;
 
 public class Main {
   
-    public static String doWork(Request request, Response response) throws ClassNotFoundException, URISyntaxException {
-	String result = new String("<h1>Esto es un titulo</h1><p>Esto es una prueba de un parrafo</p>");
-
-	return result;
+    public static String doMainInfo(Request request, Response response) throws ClassNotFoundException, URISyntaxException {
+		String result = new String("<h1>Welcome to All About Films</h1></br>" +
+				 				   "<p>This are our options:</br>" + 
+								   "To load the Data Base click this" +
+				 				   "<a href=\"https://pfinal-isi-rodrigo.herokuapp.com/load\"> link</a></br></p>");
+	
+		return result;
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
         port(getHerokuAssignedPort());
 
         // spark server
-        get("/hello", Main::doWork);
+        get("/", 	 Main::doMainInfo);
+//        get("/load",  Main:: doLoadDDBB);
+//        get("/actor", Main:: doSearchActor);
+//        get("/film", Main:: doSearchFilm);
 
     }
 

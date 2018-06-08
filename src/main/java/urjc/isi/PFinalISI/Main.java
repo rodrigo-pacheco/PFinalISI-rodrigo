@@ -9,7 +9,13 @@ import java.net.URISyntaxException;
 
 public class Main {
 	
-    public static String doSearchFilm(Request request, Response response) throws ClassNotFoundException, URISyntaxException {
+	public static String doSearchActor(Request request, Response response) throws ClassNotFoundException, URISyntaxException {
+		String result = new String("Prueba");
+		return result;
+		
+	}
+	
+    public static String doFilmHTML(Request request, Response response) throws ClassNotFoundException, URISyntaxException {
 		String result = new String("<h1>Search to know more about a film</h1></br>" + 
 								   "<p><form action=\"https://pfinal-isi-rodrigo.herokuapp.com/film\" method=\"post\">" +
 								   "Film: <input type=\"text\" name=\"film\"><br>" + 
@@ -18,7 +24,7 @@ public class Main {
 		return result;
     }
 	
-    public static String doSearchActor(Request request, Response response) throws ClassNotFoundException, URISyntaxException {
+    public static String doActorHTML(Request request, Response response) throws ClassNotFoundException, URISyntaxException {
 		String result = new String("<h1>Search to know more about an actor</h1></br>" + 
 								   "<p><form action=\"https://pfinal-isi-rodrigo.herokuapp.com/actor\" method=\"post\">" +
 								   "Actor: <input type=\"text\" name=\"actor\"><br>" + 
@@ -47,8 +53,11 @@ public class Main {
         // spark server
         get("/", 	 Main::doMainInfo);
 //        get("/load",  Main:: doLoadDDBB);
-        get("/actor", Main:: doSearchActor);
-        get("/film", Main:: doSearchFilm);
+        get("/actor", Main:: doActorHTML);
+        get("/film", Main:: doFilmHTML);
+        
+		post("/actor", Main::doSearchActor);
+		//post("/film", Main::doSearchFilm);
 
     }
 

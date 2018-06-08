@@ -10,7 +10,7 @@ import java.net.URISyntaxException;
 public class Main {
   
     public static String doWork(Request request, Response response) throws ClassNotFoundException, URISyntaxException {
-	String result = new String("Hello World");
+	String result = new String("<h1>Hello World</h1>");
 
 	return result;
     }

@@ -12,7 +12,7 @@ public class Main {
     public static String doSearchFilm(Request request, Response response) throws ClassNotFoundException, URISyntaxException {
 		String result = new String("<h1>Search to know more about a film</h1></br>" + 
 								   "<p><form action=\"https://pfinal-isi-rodrigo.herokuapp.com/film\" method=\"post\">" +
-								   "Actor: <input type=\"text\" name=\"film\"><br>" + 
+								   "Film: <input type=\"text\" name=\"film\"><br>" + 
 								   "<input type=\"submit\" value=\"Search\"></form></p></br>" + 
 								   "<p><a href=\"https://pfinal-isi-rodrigo.herokuapp.com/\">Return to homepage</a></p>");
 		return result;
@@ -28,13 +28,13 @@ public class Main {
     }
   
     public static String doMainInfo(Request request, Response response) throws ClassNotFoundException, URISyntaxException {
-		String result = new String("<h1>'' All About Films ''</h1></br>" +
-				 				   "<p>What can you do?:</br></br>" + 
-								   "To load the Data Base click this " +
+		String result = new String("<h1>Welcome to '' All About Films ''</h1></br>" +
+				 				   "<p>What can you do?</br></br>" + 
+								   "To load the <b>Data Base</b> click this " +
 				 				   "<a href=\"https://pfinal-isi-rodrigo.herokuapp.com/load\">link</a></br>" + 
-								   "To search for an actor's films click this " + 
+								   "To search for an <b>actor's films</b> click this " + 
 								   "<a href=\"https://pfinal-isi-rodrigo.herokuapp.com/actor\">link</a></br>" + 
-								   "To search for an the actors casting in a film click this" + 
+								   "To search for an the actors casting in a <b>film</b> click this " + 
 								   "<a href=\"https://pfinal-isi-rodrigo.herokuapp.com/film\">link</a></br>" + 
 				 				   "</p>");
 	

@@ -13,7 +13,8 @@ public class Main {
 		String result = new String("<h1>Search to know more about a film</h1></br>" + 
 								   "<p><form action=\"https://pfinal-isi-rodrigo.herokuapp.com/film\" method=\"post\">" +
 								   "Actor: <input type=\"text\" name=\"film\"><br>" + 
-								   "<input type=\"submit\" value=\"Search\"></form></p>");
+								   "<input type=\"submit\" value=\"Search\"></form></p></br>" + 
+								   "<p><a href=\"https://pfinal-isi-rodrigo.herokuapp.com/\">Return to homepage</a></p>");
 		return result;
     }
 	
@@ -21,7 +22,8 @@ public class Main {
 		String result = new String("<h1>Search to know more about an actor</h1></br>" + 
 								   "<p><form action=\"https://pfinal-isi-rodrigo.herokuapp.com/actor\" method=\"post\">" +
 								   "Actor: <input type=\"text\" name=\"actor\"><br>" + 
-								   "<input type=\"submit\" value=\"Search\"></form></p>");
+								   "<input type=\"submit\" value=\"Search\"></form></p></br>" + 
+				   				   "<p><a href=\"https://pfinal-isi-rodrigo.herokuapp.com/\">Return to homepage</a></p>");
 		return result;
     }
   

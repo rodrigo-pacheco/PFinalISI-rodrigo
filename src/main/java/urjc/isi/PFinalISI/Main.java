@@ -10,7 +10,10 @@ import java.net.URISyntaxException;
 public class Main {
 	
 	public static String doSearchActor(Request request, Response response) throws ClassNotFoundException, URISyntaxException {
-		String result = new String("Prueba");
+		String result = "<h1>Actor " + request.queryParams("Element1") + " appears in:</h1></br>";
+		String path = "Documentacion_Proporcionada/resources/data/other-data/tinyMovies.txt";
+		String separator = "/";
+		Graph graph = new Graph(path, separator);
 		return result;
 		
 	}

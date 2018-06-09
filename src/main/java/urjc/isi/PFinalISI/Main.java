@@ -68,7 +68,7 @@ public class Main {
 			result = "<h1>Film could not be found. Please enter another film</h1></br>" + linksBack;
 		}else {
 			result += cast + linksBack;
-		
+		}
 		return result;
 	}
 	

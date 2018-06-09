@@ -143,7 +143,7 @@ public class Main {
 			System.out.println("En try, antes de droptable");
 			statement.executeUpdate("drop table if exists films");
 			System.out.println("En try, antes de create films");
-			statement.executeUpdate("create table films (film string, actor string)");
+			statement.executeUpdate("create table films (film text, actor text)");
 			System.out.println("Después de create");
 		}catch(Exception e) {
 			System.out.println(e);

@@ -81,7 +81,7 @@ public class Main {
 			return result;
 		}
 		String result = "<h1>Actor " + actor + " appears in:</h1></br><p>";
-		String path = "Documentacion_Proporcionada/resources/data/other-data/tinyMovies.txt";
+		String path = "Documentacion_Proporcionada/resources/data/other-data/shortenedMovies.txt";
 		String separator = "/";
 		Graph graph = new Graph(path, separator);
 		
@@ -104,6 +104,8 @@ public class Main {
 								   "<p><form action=\"https://pfinal-isi-rodrigo.herokuapp.com/film\" method=\"post\">" +
 								   "Film: <input type=\"text\" name=\"film\"><br>" + 
 								   "<input type=\"submit\" value=\"Search\"></form></p></br>" + 
+								   "Some examples are:</br>'Crocodile' Dundee II (1988)</br>" +
+								   "101 Dalmatians (1996)</br>2001: A Space Travesty (2000)</br>" + 
 								   LINK_HOME);
 		return result;
     }
@@ -112,7 +114,8 @@ public class Main {
 		String result = new String("<h1>Search to know more about an actor</h1></br>" + 
 								   "<p><form action=\"https://pfinal-isi-rodrigo.herokuapp.com/actor\" method=\"post\">" +
 								   "Actor: <input type=\"text\" name=\"actor\"><br>" + 
-								   "<input type=\"submit\" value=\"Search\"></form></p></br>" + 
+								   "<input type=\"submit\" value=\"Search\"></form></br>" + 
+								   "Some examples are:</br>Rogozhin, Naum</br>Benfield, John</br>Jbara, Gregory</br>" +
 								   LINK_HOME);
 		return result;
     }

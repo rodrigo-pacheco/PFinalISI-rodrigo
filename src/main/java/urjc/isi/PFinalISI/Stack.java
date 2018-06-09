@@ -1,3 +1,5 @@
+package urjc.isi.PFinalISI;
+
 /******************************************************************************
  *  Compilation:  javac Stack.java
  *  Execution:    java Stack < input.txt

@@ -1,3 +1,5 @@
+package urjc.isi.PFinalISI;
+
 /******************************************************************************
  *  Compilation:  javac IndexGraph.java
  *  Dependencies: Graph.java In.java

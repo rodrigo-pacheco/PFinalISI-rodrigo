@@ -1,3 +1,5 @@
+package urjc.isi.PFinalISI;
+
 /******************************************************************************
  *  Compilation:  javac StdOut.java
  *  Execution:    java StdOut

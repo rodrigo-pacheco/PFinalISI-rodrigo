@@ -40,7 +40,7 @@ public class Main {
 			while (rs.next()) {
 			    // read the result set
 	
-			    result += rs.getString("actor") + "<\br>";
+			    result += rs.getString("actor") + "</br>";
 			    System.out.println("actor = "+rs.getString("actor")+"\n");
 			}
 		} catch (SQLException e) {
@@ -54,8 +54,9 @@ public class Main {
 	
 	public static String doSearchFilm(Request request, Response response) {
 		String film = request.queryParams("film");
+		String linksBack = "<p><a href=\"https://pfinal-isi-rodrigo.herokuapp.com/film\">Search another film</a> or " + LINK_HOME; 
 		if (film == null) {
-			String result = "<h1>Please insert valid actor, not null</h1>" + LINK_HOME;
+			String result = "<h1>Please insert valid film, not null</h1>" + LINK_HOME;
 			return result;
 		}
 		String result = "<h1>Film " + film + " has the following cast:</h1></br><p>";
@@ -64,10 +65,9 @@ public class Main {
 		
 		String cast = select(connection, table, film);
 		if(cast == null) {
-			result = "<h1>Film could not be found. Please enter another film</h1></br>" + LINK_HOME;
+			result = "<h1>Film could not be found. Please enter another film</h1></br>" + linksBack;
 		}else {
-			result = result + cast + LINK_HOME;
-		}
+			result += cast + linksBack;
 		
 		return result;
 	}

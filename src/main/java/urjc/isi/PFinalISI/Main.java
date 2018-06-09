@@ -134,6 +134,7 @@ public class Main {
     
     // El código de este procedimiento ha sido obtenido y adaptado de jdbc-spark-example	
     public static String doLoadDDBB(Request request, Response response) throws SQLException {
+    	System.out.println("En doLoadDDBB, antes del try");
 		try {
 			Statement statement = connection.createStatement();
 			

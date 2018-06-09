@@ -5,23 +5,14 @@ import static spark.Spark.*;
 import spark.Request;
 import spark.Response;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.util.StringTokenizer;
-
-import javax.servlet.MultipartConfigElement;
-import javax.servlet.ServletException;
-
-import org.omg.CORBA_2_3.portable.InputStream;
 
 public class Main {
 	
@@ -85,37 +76,32 @@ public class Main {
     }
 
     // El código de este procedimiento ha sido obtenido y adaptado de jdbc-spark-example	
-    public static String doLoadDDBB(Request request, Response response) throws ClassNotFoundException, URISyntaxException, IOException, ServletException, SQLException {
-    	request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/tmp"));
-		try (InputStream input = (InputStream) request.raw().getPart("uploaded_films_file").getInputStream()) { 
-			// getPart needs to use the same name "uploaded_films_file" used in the form
+    public static String doLoadDDBB(Request request, Response response) throws SQLException {
+ 
+		// Prepare SQL to create table
+		Statement statement = connection.createStatement();
 
-			// Prepare SQL to create table
-			Statement statement = connection.createStatement();
-//			statement.setQueryTimeout(30); // set timeout to 30 sec.
-			statement.executeUpdate("drop table if exists films");
-			statement.executeUpdate("create table films (film string, actor string)");
+		statement.executeUpdate("drop table if exists films");
+		statement.executeUpdate("create table films (film string, actor string)");
+		
+		In br = new In("Documentacion_Proporcionada/resources/data/other-data/tinyMovies.txt");
 
-			// Read contents of input stream that holds the uploaded file
-			InputStreamReader isr = new InputStreamReader(input);
-			BufferedReader br = new BufferedReader(isr);
-			String s;
-			while ((s = br.readLine()) != null) {
-			    System.out.println(s);
-
+		String s;
+		while ((s = br.readLine()) != null) {
+		    System.out.println(s);
+		    
 			    // Tokenize the film name and then the actors, separated by "/"
-			    StringTokenizer tokenizer = new StringTokenizer(s, "/");
-
+		    StringTokenizer tokenizer = new StringTokenizer(s, "/");
+		    
 			    // First token is the film name(year)
-			    String film = tokenizer.nextToken();
-
+		    String film = tokenizer.nextToken();
+		    
 			    // Now get actors and insert them
-			    while (tokenizer.hasMoreTokens()) {
-			    	insert(connection, film, tokenizer.nextToken());
-			    }
-			}
-			input.close();
+		    while (tokenizer.hasMoreTokens()) {
+		    	insert(connection, film, tokenizer.nextToken());
 		    }
+		}
+	    
     	String result = "<h1>Data Base loadad</h1></br>" + LINK_HOME ;
     	return result;
     }

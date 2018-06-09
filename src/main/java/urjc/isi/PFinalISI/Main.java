@@ -45,7 +45,7 @@ public class Main {
 			    result += "actor = " + rs.getString("actor") + "\n";
 			    System.out.println("actor = "+rs.getString("actor")+"\n");
 			}
-		    } catch (SQLException e) {
+		} catch (SQLException e) {
 		    	System.out.println(e.getMessage());
 		}
 		
@@ -62,10 +62,12 @@ public class Main {
 		String result = "<h1>Film " + film + " has the following cast:</h1></br><p>";
 		
 		String table = "films";
-		try(String cast = select(connection, table, film)){
+		
+		String cast = select(connection, table, film);
+		if(cast == "") {
+			result = "<h1>Film could not be found. Please enter another film</h1></br>" + LINK_HOME;
+		}else {
 			result = result + cast + LINK_HOME;
-		}catch (SQLException e) {
-	    	System.out.println(e.getMessage());
 		}
 		
 		return result;

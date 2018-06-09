@@ -6,6 +6,7 @@ import spark.Request;
 import spark.Response;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -13,7 +14,11 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 import java.util.StringTokenizer;
+
+import javax.servlet.ServletException;
 
 import org.omg.CORBA_2_3.portable.InputStream;
 
@@ -65,9 +70,21 @@ public class Main {
 								   LINK_HOME);
 		return result;
     }
+    
+    public static void insert(Connection conn, String film, String actor) {
+	String sql = "INSERT INTO films(film, actor) VALUES(?,?)";
+
+	try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+		pstmt.setString(1, film);
+		pstmt.setString(2, actor);
+		pstmt.executeUpdate();
+	    } catch (SQLException e) {
+	    System.out.println(e.getMessage());
+	}
+    }
 
     // El código de este procedimiento ha sido obtenido y adaptado de jdbc-spark-example	
-    public static String doLoadDDBB(Request request, Response response) throws ClassNotFoundException, URISyntaxException {
+    public static String doLoadDDBB(Request request, Response response) throws ClassNotFoundException, URISyntaxException, IOException, ServletException, SQLException {
 //    	request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/tmp"));
 		try (InputStream input = (InputStream) request.raw().getPart("uploaded_films_file").getInputStream()) { 
 			// getPart needs to use the same name "uploaded_films_file" used in the form

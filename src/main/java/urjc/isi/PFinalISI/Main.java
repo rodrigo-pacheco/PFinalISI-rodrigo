@@ -88,6 +88,7 @@ public class Main {
     
     // El código de este procedimiento ha sido obtenido y adaptado de jdbc-spark-example	
     public static String doLoadDDBB(Request request, Response response) throws SQLException {
+    	System.out.println("Antes del try");
 		try {
 			Statement statement = connection.createStatement();
 			
@@ -101,7 +102,7 @@ public class Main {
 		
 		In br = new In("Documentacion_Proporcionada/resources/data/other-data/tinyMovies.txt");
 		String s;
-		
+		System.out.println("Antes del WHILE");
 		while ((s = br.readLine()) != null) {
 		    System.out.println(s);
 

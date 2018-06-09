@@ -12,7 +12,7 @@ public class Main {
 	static final String LINK_HOME = "<p><a href=\"https://pfinal-isi-rodrigo.herokuapp.com/\">Return to homepage</a></p>";
 	
 	public static String doSearchActor(Request request, Response response) throws ClassNotFoundException, URISyntaxException {
-		String actor = request.queryParams("Actor");
+		String actor = request.queryParams("actor");
 		if (actor == null) {
 			String result = "<h1>Please insert valid actor, not null</h1>" + LINK_HOME;
 			return result;

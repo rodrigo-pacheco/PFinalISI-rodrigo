@@ -9,11 +9,26 @@ import java.net.URISyntaxException;
 
 public class Main {
 	
+	static final String LINK_HOME = "<p><a href=\"https://pfinal-isi-rodrigo.herokuapp.com/\">Return to homepage</a></p>";
+	
 	public static String doSearchActor(Request request, Response response) throws ClassNotFoundException, URISyntaxException {
-		String result = "<h1>Actor " + request.queryParams("Element1") + " appears in:</h1></br>";
+		String actor = request.queryParams("Actor");
+		if (actor == null) {
+			String result = "<h1>Please insert valid actor, not null</h1>" + LINK_HOME;
+			return result;
+		}
+		String result = "<h1>Actor " + actor + " appears in:</h1></br><p>";
 		String path = "Documentacion_Proporcionada/resources/data/other-data/tinyMovies.txt";
 		String separator = "/";
 		Graph graph = new Graph(path, separator);
+		
+		for (String movie:graph.adjacentTo(actor)) {
+			if (graph.st.contains(movie)){
+				result = result + movie + "</br>";
+			}
+		}
+		
+		result = result + LINK_HOME;
 		return result;
 		
 	}
@@ -23,7 +38,7 @@ public class Main {
 								   "<p><form action=\"https://pfinal-isi-rodrigo.herokuapp.com/film\" method=\"post\">" +
 								   "Film: <input type=\"text\" name=\"film\"><br>" + 
 								   "<input type=\"submit\" value=\"Search\"></form></p></br>" + 
-								   "<p><a href=\"https://pfinal-isi-rodrigo.herokuapp.com/\">Return to homepage</a></p>");
+								   LINK_HOME);
 		return result;
     }
 	
@@ -32,7 +47,7 @@ public class Main {
 								   "<p><form action=\"https://pfinal-isi-rodrigo.herokuapp.com/actor\" method=\"post\">" +
 								   "Actor: <input type=\"text\" name=\"actor\"><br>" + 
 								   "<input type=\"submit\" value=\"Search\"></form></p></br>" + 
-				   				   "<p><a href=\"https://pfinal-isi-rodrigo.herokuapp.com/\">Return to homepage</a></p>");
+								   LINK_HOME);
 		return result;
     }
   

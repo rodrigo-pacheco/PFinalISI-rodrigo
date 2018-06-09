@@ -146,7 +146,7 @@ public class Main {
 			throw new IllegalArgumentException();
 		}
 		
-		In br = new In("Documentacion_Proporcionada/resources/data/other-data/movies.txt");
+		In br = new In("Documentacion_Proporcionada/resources/data/other-data/shortenedMovies.txt");
 		String s;
 				
 		while ((s = br.readLine()) != null) {

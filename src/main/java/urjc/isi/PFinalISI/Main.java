@@ -93,7 +93,7 @@ public class Main {
 			
 			// This code only works for PostgreSQL
 			statement.executeUpdate("drop table if exists films");
-			statement.executeUpdate("create table films (film text, actor text)");
+			statement.executeUpdate("create table films (film string, actor string)");
 		}catch(IllegalArgumentException e) {
 			System.out.println(e);
 			throw new IllegalArgumentException();
@@ -116,7 +116,7 @@ public class Main {
 		    }
 		}
 
-    	String result = "<h1>Data Base loadad</h1></br>" + LINK_HOME ;
+    	String result = "<h1>Data Base loaded</h1></br>" + LINK_HOME ;
     	return result;
     }
     

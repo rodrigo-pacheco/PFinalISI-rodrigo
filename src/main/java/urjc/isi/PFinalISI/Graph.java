@@ -46,7 +46,7 @@ package urjc.isi.PFinalISI;
 public class Graph {
 
     // symbol table: key = string vertex, value = set of neighboring vertices
-    private ST<String, SET<String>> st;
+    ST<String, SET<String>> st;
 
     // number of edges
     private int E;

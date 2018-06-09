@@ -71,6 +71,8 @@ public class Main {
 		return result;
     }
     
+    
+    // El código de este procedimiento ha sido obtenido y adaptado de jdbc-spark-example	
     public static void insert(Connection conn, String film, String actor) {
 	String sql = "INSERT INTO films(film, actor) VALUES(?,?)";
 
@@ -83,38 +85,38 @@ public class Main {
 	}
     }
 
+    
     // El código de este procedimiento ha sido obtenido y adaptado de jdbc-spark-example	
-    public static String doLoadDDBB(Request request, Response response) throws ClassNotFoundException, URISyntaxException, IOException, ServletException, SQLException {
-//    	request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/tmp"));
-		try (InputStream input = (InputStream) request.raw().getPart("uploaded_films_file").getInputStream()) { 
-			// getPart needs to use the same name "uploaded_films_file" used in the form
-
-			// Prepare SQL to create table
+    public static String doLoadDDBB(Request request, Response response) throws SQLException {
+		try {
 			Statement statement = connection.createStatement();
-			statement.setQueryTimeout(30); // set timeout to 30 sec.
+			
+			// This code only works for PostgreSQL
 			statement.executeUpdate("drop table if exists films");
-			statement.executeUpdate("create table films (film string, actor string)");
+			statement.executeUpdate("create table films (film text, categories text)");
+		}catch(IllegalArgumentException e) {
+			System.out.println(e);
+			throw new IllegalArgumentException();
+		}
+		
+		In br = new In("Documentacion_Proporcionada/resources/data/other-data/tinyMovies.txt");
+		String s;
+		
+		while ((s = br.readLine()) != null) {
+		    System.out.println(s);
 
-			// Read contents of input stream that holds the uploaded file
-			InputStreamReader isr = new InputStreamReader(input);
-			BufferedReader br = new BufferedReader(isr);
-			String s;
-			while ((s = br.readLine()) != null) {
-			    System.out.println(s);
+		    // Tokenize the film name and then the actors, separated by "/"
+		    StringTokenizer tokenizer = new StringTokenizer(s, "/");
 
-			    // Tokenize the film name and then the actors, separated by "/"
-			    StringTokenizer tokenizer = new StringTokenizer(s, "/");
+		    // First token is the film name(year)
+		    String film = tokenizer.nextToken();
 
-			    // First token is the film name(year)
-			    String film = tokenizer.nextToken();
-
-			    // Now get actors and insert them
-			    while (tokenizer.hasMoreTokens()) {
-			    	insert(connection, film, tokenizer.nextToken());
-			    }
-			}
-			input.close();
+		    // Now get actors and insert them
+		    while (tokenizer.hasMoreTokens()) {
+		    	insert(connection, film, tokenizer.nextToken());
 		    }
+		}
+
     	String result = "<h1>Data Base loadad</h1></br>" + LINK_HOME ;
     	return result;
     }

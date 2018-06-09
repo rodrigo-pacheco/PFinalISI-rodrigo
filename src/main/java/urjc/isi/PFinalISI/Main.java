@@ -136,10 +136,13 @@ public class Main {
     public static String doLoadDDBB(Request request, Response response) throws SQLException {
     	System.out.println("En doLoadDDBB, antes del try");
 		try {
+			System.out.println("En try, antes de statement");
 			Statement statement = connection.createStatement();
 			
 			// This code only works for PostgreSQL
+			System.out.println("En try, antes de droptable");
 			statement.executeUpdate("drop table if exists films");
+			System.out.println("En try, antes de create films");
 			statement.executeUpdate("create table films (film string, actor string)");
 		}catch(IllegalArgumentException e) {
 			System.out.println(e);

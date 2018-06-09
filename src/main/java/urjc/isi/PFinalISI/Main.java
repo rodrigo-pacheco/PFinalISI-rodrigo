@@ -65,7 +65,7 @@ public class Main {
 		
 		String cast = select(connection, table, film);
 		if(cast == null) {
-			result = "<h1>Film could not be found. Please enter another film</h1></br>" + linksBack;
+			result = "<h1>Film " + film + "could not be found. Please enter another film</h1></br>" + linksBack;
 		}else {
 			result += cast + linksBack;
 		}
@@ -145,8 +145,13 @@ public class Main {
 			throw new IllegalArgumentException();
 		}
 		
+		System.out.println("Despues del try");
+
 		In br = new In("Documentacion_Proporcionada/resources/data/other-data/tinyMovies.txt");
 		String s;
+		
+		System.out.println("Antes del while");		
+		
 		while ((s = br.readLine()) != null) {
 		    System.out.println(s);
 

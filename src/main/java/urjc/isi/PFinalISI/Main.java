@@ -74,27 +74,26 @@ public class Main {
     
     // El código de este procedimiento ha sido obtenido y adaptado de jdbc-spark-example	
     public static void insert(Connection conn, String film, String actor) {
-	String sql = "INSERT INTO films(film, actor) VALUES(?,?)";
-
-	try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-		pstmt.setString(1, film);
-		pstmt.setString(2, actor);
-		pstmt.executeUpdate();
-	    } catch (SQLException e) {
-	    System.out.println(e.getMessage());
-	}
+		String sql = "INSERT INTO films(film, actor) VALUES(?,?)";
+	
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, film);
+			pstmt.setString(2, actor);
+			pstmt.executeUpdate();
+		    } catch (SQLException e) {
+		    	System.out.println(e.getMessage());
+		}
     }
 
     
     // El código de este procedimiento ha sido obtenido y adaptado de jdbc-spark-example	
     public static String doLoadDDBB(Request request, Response response) throws SQLException {
-    	System.out.println("Antes del try");
 		try {
 			Statement statement = connection.createStatement();
 			
 			// This code only works for PostgreSQL
 			statement.executeUpdate("drop table if exists films");
-			statement.executeUpdate("create table films (film text, categories text)");
+			statement.executeUpdate("create table films (film text, actor text)");
 		}catch(IllegalArgumentException e) {
 			System.out.println(e);
 			throw new IllegalArgumentException();
@@ -102,7 +101,6 @@ public class Main {
 		
 		In br = new In("Documentacion_Proporcionada/resources/data/other-data/tinyMovies.txt");
 		String s;
-		System.out.println("Antes del WHILE");
 		while ((s = br.readLine()) != null) {
 		    System.out.println(s);
 

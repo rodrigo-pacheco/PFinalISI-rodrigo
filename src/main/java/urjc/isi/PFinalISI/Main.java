@@ -144,7 +144,8 @@ public class Main {
 			statement.executeUpdate("drop table if exists films");
 			System.out.println("En try, antes de create films");
 			statement.executeUpdate("create table films (film string, actor string)");
-		}catch(IllegalArgumentException e) {
+			System.out.println("Después de create");
+		}catch(Exception e) {
 			System.out.println(e);
 			throw new IllegalArgumentException();
 		}

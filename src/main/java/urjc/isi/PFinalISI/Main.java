@@ -18,6 +18,7 @@ import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.util.StringTokenizer;
 
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
 
 import org.omg.CORBA_2_3.portable.InputStream;
@@ -85,13 +86,13 @@ public class Main {
 
     // El código de este procedimiento ha sido obtenido y adaptado de jdbc-spark-example	
     public static String doLoadDDBB(Request request, Response response) throws ClassNotFoundException, URISyntaxException, IOException, ServletException, SQLException {
-//    	request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/tmp"));
+    	request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/tmp"));
 		try (InputStream input = (InputStream) request.raw().getPart("uploaded_films_file").getInputStream()) { 
 			// getPart needs to use the same name "uploaded_films_file" used in the form
 
 			// Prepare SQL to create table
 			Statement statement = connection.createStatement();
-			statement.setQueryTimeout(30); // set timeout to 30 sec.
+//			statement.setQueryTimeout(30); // set timeout to 30 sec.
 			statement.executeUpdate("drop table if exists films");
 			statement.executeUpdate("create table films (film string, actor string)");
 

@@ -36,10 +36,10 @@
       <version>2.5</version>
     </dependency>
     <dependency>
-    	<groupId>postgresq</groupId>
-    	<artifactId>postgresq</artifactId>
-    	<version>9.0-801.jdbc4</version>
-    </dependency>
+    	<groupId>org.postgresql</groupId>
+    	<artifactId>postgresql</artifactId>
+    	<version>9.4.1208</version>
+</dependency>
   </dependencies>
   <build>
     <plugins>

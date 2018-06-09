@@ -134,29 +134,21 @@ public class Main {
     
     // El código de este procedimiento ha sido obtenido y adaptado de jdbc-spark-example	
     public static String doLoadDDBB(Request request, Response response) throws SQLException {
-    	System.out.println("En doLoadDDBB, antes del try");
 		try {
-			System.out.println("En try, antes de statement");
 			Statement statement = connection.createStatement();
 			
 			// This code only works for PostgreSQL
-			System.out.println("En try, antes de droptable");
 			statement.executeUpdate("drop table if exists films");
-			System.out.println("En try, antes de create films");
+			// Help from: https://stackoverflow.com/questions/20326892/any-downsides-of-using-data-type-text-for-storing-strings
 			statement.executeUpdate("create table films (film text, actor text)");
-			System.out.println("Después de create");
 		}catch(Exception e) {
 			System.out.println(e);
 			throw new IllegalArgumentException();
 		}
 		
-		System.out.println("Despues del try");
-
 		In br = new In("Documentacion_Proporcionada/resources/data/other-data/tinyMovies.txt");
 		String s;
-		
-		System.out.println("Antes del while");		
-		
+				
 		while ((s = br.readLine()) != null) {
 		    System.out.println(s);
 

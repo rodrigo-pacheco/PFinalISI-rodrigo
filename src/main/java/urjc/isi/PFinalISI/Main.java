@@ -56,7 +56,7 @@ public class Main {
 		String film = request.queryParams("film");
 		String linksBack = "<p><a href=\"https://pfinal-isi-rodrigo.herokuapp.com/film\">Search another film</a> or " + LINK_HOME; 
 		if (film == null) {
-			String result = "<h1>Please insert valid film, not null</h1>" + LINK_HOME;
+			String result = "<h1>Please insert valid film, not null</h1>" + linksBack;
 			return result;
 		}
 		String result = "<h1>Film " + film + " has the following cast:</h1></br><p>";
@@ -75,8 +75,9 @@ public class Main {
 	
 	public static String doSearchActor(Request request, Response response) throws ClassNotFoundException, URISyntaxException {
 		String actor = request.queryParams("actor");
+		String linksBack = "<p><a href=\"https://pfinal-isi-rodrigo.herokuapp.com/actor\">Search another actor</a> or " + LINK_HOME;
 		if (actor == null) {
-			String result = "<h1>Please insert valid actor, not null</h1>" + LINK_HOME;
+			String result = "<h1>Please insert valid actor, not null</h1>" + linksBack;
 			return result;
 		}
 		String result = "<h1>Actor " + actor + " appears in:</h1></br><p>";
@@ -94,7 +95,7 @@ public class Main {
 			result = result + "Actor " + actor + " not found in our data, please insert valid actor";
 		}
 		
-		result = result + LINK_HOME;
+		result = result + linksBack;
 		return result;
 	}
 	

@@ -39,14 +39,13 @@ public class Main {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 			    // read the result set
-			    result += "film = " + rs.getString("film") + "\n";
-			    System.out.println("film = "+rs.getString("film") + "\n");
 	
-			    result += "actor = " + rs.getString("actor") + "\n";
+			    result += rs.getString("actor") + "<\br>";
 			    System.out.println("actor = "+rs.getString("actor")+"\n");
 			}
 		} catch (SQLException e) {
 		    	System.out.println(e.getMessage());
+		    	result = null;
 		}
 		
 		return result;
@@ -64,7 +63,7 @@ public class Main {
 		String table = "films";
 		
 		String cast = select(connection, table, film);
-		if(cast == "") {
+		if(cast == null) {
 			result = "<h1>Film could not be found. Please enter another film</h1></br>" + LINK_HOME;
 		}else {
 			result = result + cast + LINK_HOME;

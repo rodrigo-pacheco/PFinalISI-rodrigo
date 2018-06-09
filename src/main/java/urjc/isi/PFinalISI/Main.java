@@ -5,14 +5,22 @@ import static spark.Spark.*;
 import spark.Request;
 import spark.Response;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.util.StringTokenizer;
+
+import javax.servlet.ServletException;
+
+import org.omg.CORBA_2_3.portable.InputStream;
 
 public class Main {
 	
@@ -63,6 +71,8 @@ public class Main {
 		return result;
     }
     
+    
+    // El código de este procedimiento ha sido obtenido y adaptado de jdbc-spark-example	
     public static void insert(Connection conn, String film, String actor) {
 	String sql = "INSERT INTO films(film, actor) VALUES(?,?)";
 
@@ -75,38 +85,39 @@ public class Main {
 	}
     }
 
+    
     // El código de este procedimiento ha sido obtenido y adaptado de jdbc-spark-example	
     public static String doLoadDDBB(Request request, Response response) throws SQLException {
-    	try {
-			// Prepare SQL to create table
+    	System.out.println("Antes del try");
+		try {
 			Statement statement = connection.createStatement();
-	
+			
+			// This code only works for PostgreSQL
 			statement.executeUpdate("drop table if exists films");
-			statement.executeUpdate("create table films (film string, actor string)");
-    	}catch(IllegalArgumentException e) {
-    		throw new IllegalArgumentException();
-    	}
+			statement.executeUpdate("create table films (film text, categories text)");
+		}catch(IllegalArgumentException e) {
+			System.out.println(e);
+			throw new IllegalArgumentException();
+		}
 		
-    	System.out.println("Antes de IN");
 		In br = new In("Documentacion_Proporcionada/resources/data/other-data/tinyMovies.txt");
-
 		String s;
+		System.out.println("Antes del WHILE");
 		while ((s = br.readLine()) != null) {
-			System.out.println("While para: " + s);
 		    System.out.println(s);
-		    
-			    // Tokenize the film name and then the actors, separated by "/"
+
+		    // Tokenize the film name and then the actors, separated by "/"
 		    StringTokenizer tokenizer = new StringTokenizer(s, "/");
-		    
-			    // First token is the film name(year)
+
+		    // First token is the film name(year)
 		    String film = tokenizer.nextToken();
-		    
-			    // Now get actors and insert them
+
+		    // Now get actors and insert them
 		    while (tokenizer.hasMoreTokens()) {
 		    	insert(connection, film, tokenizer.nextToken());
 		    }
 		}
-	    
+
     	String result = "<h1>Data Base loadad</h1></br>" + LINK_HOME ;
     	return result;
     }

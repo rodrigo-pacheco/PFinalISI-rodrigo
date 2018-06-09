@@ -77,17 +77,22 @@ public class Main {
 
     // El código de este procedimiento ha sido obtenido y adaptado de jdbc-spark-example	
     public static String doLoadDDBB(Request request, Response response) throws SQLException {
- 
-		// Prepare SQL to create table
-		Statement statement = connection.createStatement();
-
-		statement.executeUpdate("drop table if exists films");
-		statement.executeUpdate("create table films (film string, actor string)");
+    	try {
+			// Prepare SQL to create table
+			Statement statement = connection.createStatement();
+	
+			statement.executeUpdate("drop table if exists films");
+			statement.executeUpdate("create table films (film string, actor string)");
+    	}catch(IllegalArgumentException e) {
+    		throw new IllegalArgumentException();
+    	}
 		
+    	System.out.println("Antes de IN");
 		In br = new In("Documentacion_Proporcionada/resources/data/other-data/tinyMovies.txt");
 
 		String s;
 		while ((s = br.readLine()) != null) {
+			System.out.println("While para: " + s);
 		    System.out.println(s);
 		    
 			    // Tokenize the film name and then the actors, separated by "/"

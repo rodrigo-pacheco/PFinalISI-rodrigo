@@ -1,3 +1,5 @@
+package urjc.isi.PFinalISI;
+
 /******************************************************************************
  *  Compilation:  javac Graph.java
  *  Execution:    java Graph < input.txt

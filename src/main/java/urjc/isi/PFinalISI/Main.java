@@ -28,6 +28,50 @@ public class Main {
 	
 	static final String LINK_HOME = "<p><a href=\"https://pfinal-isi-rodrigo.herokuapp.com/\">Return to homepage</a></p>";
 	
+	
+    public static String select(Connection conn, String table, String film) {
+		String sql = "SELECT * FROM " + table + " WHERE film=?";
+	
+		String result = new String();
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, film);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+			    // read the result set
+			    result += "film = " + rs.getString("film") + "\n";
+			    System.out.println("film = "+rs.getString("film") + "\n");
+	
+			    result += "actor = " + rs.getString("actor") + "\n";
+			    System.out.println("actor = "+rs.getString("actor")+"\n");
+			}
+		    } catch (SQLException e) {
+		    	System.out.println(e.getMessage());
+		}
+		
+		return result;
+    }
+    
+	
+	public static String doSearchFilm(Request request, Response response) {
+		String film = request.queryParams("film");
+		if (film == null) {
+			String result = "<h1>Please insert valid actor, not null</h1>" + LINK_HOME;
+			return result;
+		}
+		String result = "<h1>Film " + film + " has the following cast:</h1></br><p>";
+		
+		String table = "films";
+		try(String cast = select(connection, table, film)){
+			result = result + cast + LINK_HOME;
+		}catch (SQLException e) {
+	    	System.out.println(e.getMessage());
+		}
+		
+		return result;
+	}
+	
+	
 	public static String doSearchActor(Request request, Response response) throws ClassNotFoundException, URISyntaxException {
 		String actor = request.queryParams("actor");
 		if (actor == null) {
@@ -150,7 +194,7 @@ public class Main {
         get("/film", Main:: doFilmHTML);
         
 		post("/actor", Main::doSearchActor);
-		//post("/film", Main::doSearchFilm);
+		post("/film", Main::doSearchFilm);
 
     }
 

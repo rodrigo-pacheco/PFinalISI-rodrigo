@@ -22,15 +22,18 @@ public class Main {
 		String separator = "/";
 		Graph graph = new Graph(path, separator);
 		
-		for (String movie:graph.adjacentTo(actor)) {
-			if (graph.st.contains(movie)){
-				result = result + movie + "</br>";
+		try {
+			for (String movie:graph.adjacentTo(actor)) {
+				if (graph.st.contains(movie)){
+					result = result + movie + "</br>";
+				}
 			}
+		}catch (IllegalArgumentException e){
+			result = result + "Actor " + actor + " not found in our data, please insert valid actor";
 		}
 		
 		result = result + LINK_HOME;
 		return result;
-		
 	}
 	
     public static String doFilmHTML(Request request, Response response) throws ClassNotFoundException, URISyntaxException {

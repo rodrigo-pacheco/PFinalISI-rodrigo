@@ -1,0 +1,26 @@
+Práctica Final de la asignatura Ingeniería de Sistemas de la Información impartida por Pedro de las Heras Quirós.
+La asignatura forma parte del plan de estudios del Grado en Ingeniería en Tecnologías de las Comunicaciones impartido en la Universidad Rey Juan Carlos de Madrid.
+
+Elaborada por el alumno Rodrigo Pacheco, estudiante del Doble Grado en Ingeniería en Tecnologías de las Telecomunicaciones e Ingeniería Aeroespacial en Aeronavegación.
+
+Para comprobar el resultado final de la práctica diríjase a https://pfinal-isi-rodrigo.herokuapp.com/
+
+La práctica ha sido elaborada a partir de una documentación proporcionada que incluía ficheros con datos sobre películas y código para obtener información de dichos datos.
+
+La funcionalidad de la práctica es la siguiente:
+ -/load: Carga una base de datos en postgresql en Heroku con una tabla "films" en la que se incluyen películas con su reparto. *
+ -/actor: Permite buscar las películas en las que aparece un actor. La búsqueda se realiza construyendo un grafo y bucando los arcos adyacentes el nodo del actor en cuestión.
+ -/film: Permite conocer el reparto de una película. La búsqueda se realiza haciendo consultas sql a la base de datos creada.
+ 
+La práctica ha sido llevada a cabo usando las herramientas Travis y Heroku para hacer integración y despliegue continuado.
+
+Además, la práctica se compone de test para el código empleado.
+
+
+
+
+
+* El tamaño del fichero de datos debió ser limitado porque Heroku tiene un tiempo de expiración por el cual deja de funcionar en su plan gratuito. Para evitar que esto sucediera, se limitó considerablemente el tamaño del fichero.
+
+** El diseño de la base de datos puede no ser del todo óptimo puesto que crea una entrada por cada película y los actores de la misma. Quizás sería mejor tener una tabla con películas, otra con actores y otra que las interrelacionara. Se propone como mejora ¿Te animas? ;)
+

@@ -14,7 +14,7 @@ La funcionalidad de la práctica es la siguiente:
  
 La práctica ha sido llevada a cabo usando las herramientas Travis y Heroku para hacer integración y despliegue continuado.
 
-Además, la práctica se compone de test para el código empleado.
+Además, la práctica se compone de tests para el código empleado.
 
 
 

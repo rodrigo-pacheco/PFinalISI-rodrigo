@@ -22,7 +22,7 @@ import spark.Response;
 public class AllAboutFilmsTests {
 	
 	// Test para doLoadDDBB
-	@Test()
+	@Test(expected=IllegalArgumentException.class)
 	public void doMainInfo1() throws SQLException {
 		Request request = null;
 		Response response = null;
